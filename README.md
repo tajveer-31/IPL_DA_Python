@@ -19,3 +19,12 @@
 
 # The Questions
 
+Below are the questions I want to answer in my project:
+
+1. What are the brand values of all the teams? Why is there a significant gap between the brand value of the top three teams and the others?
+
+2. Which team is doing great in terms of business and how?
+
+3. How revenue and brand value of teams are related to each other?
+
+4. Brand value depends upon fan engagement. How?
