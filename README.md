@@ -27,7 +27,7 @@ Below are the questions I want to answer in my project:
 
 3. How revenue and brand value of teams are related to each other?
 
-4. Brand value depends upon fan engagement. How?
+4. Project the future brand valuation of the teams, taking revenue and other factors into consideration.
 
 
 # Data Preparation and Cleanup
@@ -157,4 +157,68 @@ plt.show()
 - Here we can see a big chunk of value is concentrated at top 3 franchise and others are valued almost 60% less!
 
 - Median valuation of top 3 is around 250 Million USD and median of other teams is around 150 Million USD
+
+- Top 3 teams show a slightly wider spread, meaning even among them, there's some competition. Other teams are more tightly clustered, indicating similar brand strength levels among most of them.
+
+- The top 3 likely benefit from strong fan bases, legacy, sponsorships, and consistent performance. Other teams may need branding, marketing, and performance improvements to close the gap.
+
+
+
+## 3. How revenue and brand value of teams are related to each other?
+ 
+
+So, When I was researching about how the brand value of teams affects its revenue potential, I was quite sure that high the brand value higher the revenue. 
+
+But I was little surprised with the results!
+
+```python
+
+plt.figure(figsize=(10,6))
+sns.set_style("whitegrid")
+
+# Create a column to highlight top teams
+top_teams = ['Mumbai Indians', 'Chennai Super Kings', 'Royal Challengers Bengaluru']
+df['is_top_team'] = df['team'].isin(top_teams)
+
+sns.scatterplot(
+    data=df,
+    x='FY25 Revenue (Rs Cr)',
+    y='brand_value_usd_m',
+    hue= df['is_top_team'],
+    s=120
+)
+
+# Add team labels
+for i in range(len(df)):
+    plt.text(
+        df['FY25 Revenue (Rs Cr)'][i] + 1,
+        df['brand_value_usd_m'][i] + 1,
+        df['team'][i],
+        fontsize=9
+    )
+
+# Titles and labels
+plt.title("Revenue vs Brand Value (IPL Teams)", fontsize=14, fontweight='bold')
+plt.xlabel("Revenue ($ Million)", fontsize=12)
+plt.ylabel("Brand Value ($ Million)", fontsize=12)
+plt.legend(title= 'Teams', labels=['Top Teams', 'Other Teams'], loc='upper right')
+sns.despine()
+plt.tight_layout()
+plt.show()
+
+```
+## Resutls:
+
+![alt text](3_image.png)
+*Scatter plot shows the relationship between revenue and brand value.*
+
+## Insights:
+
+- To my surprise, KKR has the highest revenue among all the teams, but it has comparatively lower brand value (~220M) than top-tier teams. This is mainly because of the strong business operations, but weak brand perception.
+
+- Royal Challengers Bengaluru stands out to have highest brand value (~270M) But lower revenue (~500M) compared to other top teams. Their brand is driven by fan engagement, star power, and loyalty, not just revenue.
+
+- Teams like Delhi, Hyderabad, Rajasthan Fall into a tight cluster of (~600–650M revenue, ~145–155M brand value) as these teams have similar market positioning and growth stage.
+
+- Hence we can say that only revenue doesnot affect the brand value of a team, factors like fan engagement, star power, and loyalty plays a vital role.
 
