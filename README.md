@@ -27,7 +27,7 @@ Below are the questions I want to answer in my project:
 
 3. How revenue and brand value of teams are related to each other?
 
-4. Project the future brand valuation of the teams, taking revenue and other factors into consideration.
+4. Considering various parameters, Estimate the intrensic valuation of each franchise and compare it with the market valueation.
 
 
 # Data Preparation and Cleanup
@@ -222,8 +222,82 @@ plt.show()
 
 
 
-## 4. Project the future brand valuation of the teams, taking revenue and other factors into consideration.
+## 4. Considering various parameters, Estimate the intrensic valuation of each franchise and compare it with the market valueation.
 
 
+Under this analysis what I did was giving specific weights to different parameters related to teams (like WIN PERCENTAGE, FAN ENGAGEMENT, NET WORTH and REVENUE) and accordingly find the intrensic value of the franchise.
 
+I named it 'A WEIGHTED SCORING MODEL'.
+
+*A weighted scoring model was developed by normalizing key factors and assigning business-driven weights to estimate IPL team brand valuations.*
+
+
+Let's see the code:
+
+```python
+
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_absolute_error
+
+features = df[['Total Followers', 'FY25 Revenue (Rs Cr)', 'Net Worth (₹ Crore)', 'win_percentage']]
+scaler = MinMaxScaler()
+scaled_values = scaler.fit_transform(features)
+
+scaled_df = pd.DataFrame(scaled_values, columns=[
+    'followers', 'revenue', 'net_worth', 'win_pct'
+])
+scaler = MinMaxScaler()
+scaled_values = scaler.fit_transform(features)
+
+scaled_df = pd.DataFrame(scaled_values, columns=[
+    'followers', 'revenue', 'net_worth', 'win_pct'
+])
+w_followers = 0.4
+w_revenue = 0.3
+w_networth = 0.2
+w_winpct = 0.1
+
+df['brand_score'] = (
+    w_followers * scaled_df['followers'] +
+    w_revenue * scaled_df['revenue'] +
+    w_networth * scaled_df['net_worth'] +
+    w_winpct * scaled_df['win_pct']
+)
+
+min_val = df['Brand Value (USD)'].min()
+max_val = df['Brand Value (USD)'].max()
+
+df['Estimated_Brand_Value'] = (
+    df['brand_score'] * (max_val - min_val) + min_val
+)
+
+
+mae = mean_absolute_error(df['Brand Value (USD)'], df['Estimated_Brand_Value'])
+print("Mean Absolute Error:", mae)
+
+
+```
+
+
+First of all I imported minmaxscaler from Sklearn to bring all the factors to a same scale for scoring. And than I assigned weights to the factors and ultimately calculated the estimated brand value. Additionally, for error check I calculated absolute error.
+
+
+For visualization I use barplot:
+
+![alt text](5_image.png)
+*Bar graph visualizing Actual vs Intrensic Brand value of IPL Teams.*
+
+![alt text](images/6_image.png)
+*Bar graph showing absolute error.*
+
+# Insights
+
+- Except Royal Challengers Bengaluru and Mumbai Indians all the franchise are undervalued according to these fectors. 
+
+- Royal Challengers Bengaluru's current market value is approx.~270M and its intrensic estimated value is approx.~210M, around 60M difference which tells us that the franchise is highly overvalued. This is mainly because RCB’s real strength goes beyond these numbers. 
+
+- Difference in values of other teams is not so significant, kind of proving our WEIGHTED SCORING MODEL.
+
+# Conclusion
+This exploration into IPL franchise's brand valuation gave me new prespectives in my learning journy. 
 
