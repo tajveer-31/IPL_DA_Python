@@ -176,7 +176,7 @@ But I was little surprised with the results!
 plt.figure(figsize=(10,6))
 sns.set_style("whitegrid")
 
-# Create a column to highlight top teams
+
 top_teams = ['Mumbai Indians', 'Chennai Super Kings', 'Royal Challengers Bengaluru']
 df['is_top_team'] = df['team'].isin(top_teams)
 
@@ -188,7 +188,6 @@ sns.scatterplot(
     s=120
 )
 
-# Add team labels
 for i in range(len(df)):
     plt.text(
         df['FY25 Revenue (Rs Cr)'][i] + 1,
@@ -197,7 +196,6 @@ for i in range(len(df)):
         fontsize=9
     )
 
-# Titles and labels
 plt.title("Revenue vs Brand Value (IPL Teams)", fontsize=14, fontweight='bold')
 plt.xlabel("Revenue ($ Million)", fontsize=12)
 plt.ylabel("Brand Value ($ Million)", fontsize=12)
@@ -209,7 +207,7 @@ plt.show()
 ```
 ## Resutls:
 
-![alt text](3_image.png)
+![alt text](4_image.png)
 *Scatter plot shows the relationship between revenue and brand value.*
 
 ## Insights:
@@ -221,4 +219,11 @@ plt.show()
 - Teams like Delhi, Hyderabad, Rajasthan Fall into a tight cluster of (~600–650M revenue, ~145–155M brand value) as these teams have similar market positioning and growth stage.
 
 - Hence we can say that only revenue doesnot affect the brand value of a team, factors like fan engagement, star power, and loyalty plays a vital role.
+
+
+
+## 4. Project the future brand valuation of the teams, taking revenue and other factors into consideration.
+
+
+
 
