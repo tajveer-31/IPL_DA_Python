@@ -89,7 +89,7 @@ plt.show()
 ```
 ### Results
 
-![alt text](image_1.png)
+![alt text](images/1_image.png)
 *Bar graph visualizing IPL Team brand value comparison.*
 
 ### Insights:
@@ -149,7 +149,7 @@ plt.show()
 ```
 ### Results
 
-![alt text](2_image.png)
+![alt text](images/2_image.png)
 *Box plots showing brand value comparison between top 3 teams and others*
 
 ### Insights:
@@ -207,7 +207,7 @@ plt.show()
 ```
 ## Resutls:
 
-![alt text](4_image.png)
+![alt text](images/4_image.png)
 *Scatter plot shows the relationship between revenue and brand value.*
 
 ## Insights:
