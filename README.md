@@ -284,7 +284,7 @@ First of all I imported minmaxscaler from Sklearn to bring all the factors to a 
 
 For visualization I use barplot:
 
-![alt text](5_image.png)
+![alt text](images/5_image.png)
 *Bar graph visualizing Actual vs Intrensic Brand value of IPL Teams.*
 
 ![alt text](images/6_image.png)
